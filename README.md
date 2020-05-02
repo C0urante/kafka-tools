@@ -71,13 +71,17 @@ play test.mp3
 
 ### Local build
 
-The tools can be built locally by running the following command:
+Build the project with:
 
 ```bash
-mvn package
+mvn clean package
 ```
 
-and then running executables in the `bin/` directory.
+and then add the `bin/` directory onto your `PATH`:
+
+```bash
+export PATH="$PATH:$PWD/bin/"
+```
 
 ### Onto an existing Kafka deployment
 
