@@ -77,7 +77,7 @@ Build the project with:
 mvn clean package
 ```
 
-and then add the `bin/` directory onto your `PATH`:
+and then add the `bin/` directory onto your `$PATH`:
 
 ```bash
 export PATH="$PATH:$PWD/bin/"
