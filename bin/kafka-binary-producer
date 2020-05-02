@@ -1,0 +1,17 @@
+#! /usr/bin/env bash
+
+set -e
+
+base_dir=$(dirname $0)/..
+
+if ! compgen -G "${base_dir}"/target/kafka-tools-C0urante-*.jar > /dev/null; then
+  echo 1>&2 "No kafka-tools-C0urante aritfacts found in '${base_dir}/target'; please build the project " \
+      "using 'mvn clean package' and try again"
+  exit 1
+fi
+
+for jar in "${base_dir}/target"/kafka-tools-*.jar; do
+  export CLASSPATH="$CLASSPATH:$jar"
+done
+
+exec kafka-console-producer --line-reader com.github.c0urante.kafka.tools.RawMessageReader "$@"
