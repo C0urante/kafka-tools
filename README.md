@@ -38,6 +38,30 @@ Only the value of each message is written. Properties like `print.key` are not y
 
 This tool has no extra configurability beyond what is already provided by `kafka-console-consumer`.
 
+### Kafka Header Consumer
+
+`kafka-header-consumer`, like `kafka-binary-consumer`, is a small wrapper around the
+`kafka-console-consumer`. Its purpose is different, though; whereas there are some practical
+applications for writing and reading binary data to and from Kafka in message values, this tool is
+intended solely for debugging purposes and to get around limitations in other tools when handling
+binary data (such as failing to print out header values past null bytes).
+
+The consumer works by writing every header key and value to a separate file, with a name of
+`$d/$t-$p-$o-$h-$s`, where `$d` is a configurable parent directory (which defaults to `.`), `$t` is
+the name of the topic, `$p` is the partition of the topic, `$o` is the offset of the topic, `$h` is
+the number of the header for that message (i.e., the first header will have a value of `0`, the
+second header will have a value of `1`, etc.), and `$s` is `key` if the file contains the header key
+and `value` if the file contains the header value.
+
+#### Configuration
+
+|  Property  |  Type  | Default | Effect |
+|------------|--------|---------|--------|
+| output.dir | String |   "."   | A parent directory in which all files created by the consumer will be located. |
+
+Beyond these properties, this tool also supports all configurability provided by
+`kafka-console-consumer`.
+
 ### Quickstart
 
 Assumptions:
